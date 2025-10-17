@@ -1,0 +1,50 @@
+﻿// Recetas.Infrastructure/Filters/ValidationFilter.cs
+using System;
+using System.Threading.Tasks;
+using FluentValidation;
+using FluentValidation.Results; // Asegúrate de usar el alias si es necesario
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Recetas.Infrastructure.Validators;
+
+namespace Recetas.Infrastructure.Filters
+{
+    public class ValidationFilter : IAsyncActionFilter
+    {
+        private readonly IValidationService _validationService;
+        private readonly IServiceProvider _serviceProvider;
+
+        public ValidationFilter(IValidationService validationService, IServiceProvider serviceProvider)
+        {
+            _validationService = validationService;
+            _serviceProvider = serviceProvider;
+        }
+
+        public async Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
+        {
+            foreach (var arg in context.ActionArguments.Values)
+            {
+                if (arg is null) continue;
+
+                // ¿Existe un validador registrado para este tipo?
+                var validatorType = typeof(IValidator<>).MakeGenericType(arg.GetType());
+                var validator = _serviceProvider.GetService(validatorType);
+                if (validator is null) continue;
+
+                // Llama al ValidationService<T>.ValidateAsync
+                var method = typeof(IValidationService).GetMethod(nameof(IValidationService.ValidateAsync))!;
+                var generic = method.MakeGenericMethod(arg.GetType());
+                var task = (Task<FluentValidation.Results.ValidationResult>)generic.Invoke(_validationService, new[] { arg })!;
+                var result = await task;
+
+                if (!result.IsValid)
+                {
+                    context.Result = new BadRequestObjectResult(new { Errors = result.Errors });
+                    return;
+                }
+            }
+
+            await next();
+        }
+    }
+}

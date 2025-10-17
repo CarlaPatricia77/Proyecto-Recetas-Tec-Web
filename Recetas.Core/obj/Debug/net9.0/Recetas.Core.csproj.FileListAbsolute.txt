@@ -1,0 +1,12 @@
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\bin\Debug\net9.0\Recetas.Core.deps.json
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\bin\Debug\net9.0\Recetas.Core.dll
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\bin\Debug\net9.0\Recetas.Core.pdb
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.AssemblyInfoInputs.cache
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.AssemblyInfo.cs
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.csproj.CoreCompileInputs.cache
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.dll
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\refint\Recetas.Core.dll
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.pdb
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\ref\Recetas.Core.dll
+C:\Users\LENOVO\OneDrive\Desktop\Universidad\Programación 2\Recetas.Api\Recetas.Core\obj\Debug\net9.0\Recetas.Core.sourcelink.json
