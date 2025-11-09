@@ -4,9 +4,9 @@ using Recetas.Core.Interfaces;
 using Recetas.Infrastructure.Repositories;
 using Recetas.Infrastructure.Filters;
 using Recetas.Infrastructure.Validators;
-using FluentValidation;
 using Recetas.Infrastructure.Mappings;
-
+using Recetas.Core.Services;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,30 +20,42 @@ builder.Services.AddDbContext<RecetasContext>(options =>
 // CONFIGURACIÓN DE SERVICIOS PRINCIPALES
 // =====================================
 
-// Controladores + JSON + desactivar filtro default
-builder.Services.AddControllers()
-    .AddNewtonsoftJson(options =>
-    {
-        options.SerializerSettings.ReferenceLoopHandling =
-            Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-    })
-    .ConfigureApiBehaviorOptions(options =>
-    {
-        // Desactiva la validación automática de ModelState
-        // para que funcione el ValidationFilter personalizado
-        options.SuppressModelStateInvalidFilter = true;
-    });
+// Controladores + JSON + desactivar filtro default + GlobalExceptionFilter
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<ValidationFilter>();
+    options.Filters.Add<GlobalExceptionFilter>(); // ? Nuevo filtro global
+})
+.AddNewtonsoftJson(options =>
+{
+    options.SerializerSettings.ReferenceLoopHandling =
+        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+})
+.ConfigureApiBehaviorOptions(options =>
+{
+    // Desactiva la validación automática de ModelState
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 // =====================================
-// REPOSITORIOS
+// PATRÓN UNIT OF WORK
 // =====================================
-builder.Services.AddTransient<IRecetasRepository, RecetaRepository>();
-builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
-builder.Services.AddTransient<ICategoriasRepository, CategoriaRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// =====================================
+// REPOSITORIOS (Base Repository Genérico)
+// =====================================
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+// =====================================
+// SERVICES (Lógica de Negocio)
+// =====================================
+builder.Services.AddScoped<IRecetaService, RecetaService>();
 
 // =====================================
 // VALIDADORES (FluentValidation)
 // =====================================
+// Descomentar cuando crees los validadores:
 // builder.Services.AddValidatorsFromAssemblyContaining<RecetaValidator>();
 // builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
 // builder.Services.AddValidatorsFromAssemblyContaining<CategoriaValidator>();
@@ -52,15 +64,7 @@ builder.Services.AddTransient<ICategoriasRepository, CategoriaRepository>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
 
 // =====================================
-// FILTROS
-// =====================================
-builder.Services.AddControllers(options =>
-{
-    options.Filters.Add<ValidationFilter>();
-});
-
-// =====================================
-// AUTOMAPPER (opcional)
+// AUTOMAPPER
 // =====================================
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 

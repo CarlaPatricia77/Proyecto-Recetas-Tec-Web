@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Recetas.Core.Entities
+﻿namespace Recetas.Core.Entities
 {
-    internal class BaseEntity
+    /// <summary>
+    /// Clase base abstracta para todas las entidades del dominio
+    /// </summary>
+    public abstract class BaseEntity
     {
+        public int Id { get; set; }
     }
 }

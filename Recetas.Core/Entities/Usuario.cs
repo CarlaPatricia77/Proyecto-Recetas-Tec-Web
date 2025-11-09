@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Recetas.Core.Entities
 {
-    public partial class Usuario
+    public partial class Usuario : BaseEntity
     {
-        public int Id { get; set; }
-        public string Nombre { get; set; } = null!;
-        public string Correo { get; set; } = null!;
-        public string? Contrasena { get; set; }
-        public DateTime FechaCreacion { get; set; } = DateTime.Now;
+        // Remover: public int Id { get; set; } (ahora heredado)
+        public string nombre { get; set; } = null!;
+        public string correo { get; set; } = null!;
+        public string? contrasena { get; set; }
+        public DateTime fecha_creacion { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = true;
 
         // Relaciones

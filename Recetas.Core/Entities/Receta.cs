@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Recetas.Core.Entities
 {
-    public partial class Receta
+    public partial class Receta : BaseEntity
     {
-        public int Id { get; set; }
+        // Remover: public int Id { get; set; } (ahora heredado)
         public int? UsuarioId { get; set; }
         public int? CategoriaId { get; set; }
-
         public string Titulo { get; set; } = null!;
         public string? Descripcion { get; set; }
         public string Ingredientes { get; set; } = null!;
