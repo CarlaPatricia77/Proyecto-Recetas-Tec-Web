@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Recetas.Infraestructura")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f05ddde4a08962205418e692eb5304595864299f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0395f3896aca4942db84a116aeb1e650f65bab3f")]
 [assembly: System.Reflection.AssemblyProductAttribute("Recetas.Infraestructura")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Recetas.Infraestructura")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
