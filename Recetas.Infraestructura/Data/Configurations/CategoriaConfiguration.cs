@@ -12,17 +12,17 @@ namespace Recetas.Infrastructure.Data.Configurations
 
             builder.ToTable("Categorias");
 
-            builder.Property(c => c.Nombre)
+            builder.Property(c => c.nombre)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.HasIndex(c => c.Nombre)
+            builder.HasIndex(c => c.nombre)
                 .IsUnique();
 
-            builder.Property(c => c.Descripcion)
+            builder.Property(c => c.descripcion)
                 .HasMaxLength(255);
 
-            builder.Property(r => r.FechaCreacion)
+            builder.Property(r => r.fecha_creacion)
     .HasColumnType("datetime(6)")
     .IsRequired();
 

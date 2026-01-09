@@ -2,7 +2,8 @@
 using System;
 using System.Threading.Tasks;
 using FluentValidation;
-using FluentValidation.Results; // Asegúrate de usar el alias si es necesario
+using Recetas.Infrastructure.Validators;
+// Asegúrate de usar el alias si es necesario
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Recetas.Infrastructure.Validators;
@@ -34,7 +35,8 @@ namespace Recetas.Infrastructure.Filters
                 // Llama al ValidationService<T>.ValidateAsync
                 var method = typeof(IValidationService).GetMethod(nameof(IValidationService.ValidateAsync))!;
                 var generic = method.MakeGenericMethod(arg.GetType());
-                var task = (Task<FluentValidation.Results.ValidationResult>)generic.Invoke(_validationService, new[] { arg })!;
+                var task =(Task<Recetas.Infrastructure.Validators.ValidationResult>)   generic.Invoke(_validationService, new[] { arg })!;
+
                 var result = await task;
 
                 if (!result.IsValid)

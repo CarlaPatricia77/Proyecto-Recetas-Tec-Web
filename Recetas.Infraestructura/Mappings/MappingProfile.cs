@@ -13,7 +13,7 @@ namespace Recetas.Infrastructure.Mappings
                 .ForMember(d => d.NombreUsuario,
                     o => o.MapFrom(s => s.Usuario != null ? s.Usuario.nombre : null))
                 .ForMember(d => d.NombreCategoria,
-                    o => o.MapFrom(s => s.Categoria != null ? s.Categoria.Nombre : null))
+                    o => o.MapFrom(s => s.Categoria != null ? s.Categoria.nombre : null))
                 .ReverseMap();
 
             // Mapeos de Usuario

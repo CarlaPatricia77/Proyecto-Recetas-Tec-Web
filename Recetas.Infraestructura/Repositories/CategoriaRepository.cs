@@ -44,7 +44,7 @@ namespace Recetas.Infrastructure.Repositories
         public async Task<Categoria?> GetByNombreAsync(string nombre) =>
             await _ctx.Categorias
                 .Include(c => c.Recetas)
-                .FirstOrDefaultAsync(c => c.Nombre == nombre);
+                .FirstOrDefaultAsync(c => c.nombre == nombre);
         public async Task<IEnumerable<Categoria>> GetCategoriasConMasDeNRecetasAsync(int cantidad) =>
     await _ctx.Categorias
         .Include(c => c.Recetas)
@@ -54,7 +54,7 @@ namespace Recetas.Infrastructure.Repositories
         public async Task<IEnumerable<Categoria>> BuscarCategoriasPorDescripcionAsync(string texto) =>
      await _ctx.Categorias
          .Include(c => c.Recetas)
-         .Where(c => c.Descripcion != null && c.Descripcion.Contains(texto))
+         .Where(c => c.descripcion != null && c.descripcion.Contains(texto))
          .ToListAsync();
 
     }

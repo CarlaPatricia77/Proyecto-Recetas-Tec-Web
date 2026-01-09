@@ -17,12 +17,12 @@ builder.Services.AddDbContext<RecetasContext>(options =>
 #endregion
 
 // =====================================
-// CONFIGURACIÓN DE SERVICIOS PRINCIPALES
+// CONFIGURACIÓN DE CONTROLADORES Y FILTROS
 // =====================================
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add<ValidationFilter>();
     options.Filters.Add<GlobalExceptionFilter>();
+    options.Filters.Add<ValidationFilter>();
 })
 .AddNewtonsoftJson(options =>
 {
@@ -31,30 +31,29 @@ builder.Services.AddControllers(options =>
 })
 .ConfigureApiBehaviorOptions(options =>
 {
+    // Desactiva la validación automática de ModelState
     options.SuppressModelStateInvalidFilter = true;
 });
 
 // =====================================
-// PATRÓN UNIT OF WORK
+// UNIT OF WORK
 // =====================================
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // =====================================
-// REPOSITORIOS
+// REPOSITORIOS GENÉRICOS
 // =====================================
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 // =====================================
-// SERVICES
+// SERVICES DE NEGOCIO
 // =====================================
 builder.Services.AddScoped<IRecetaService, RecetaService>();
 
 // =====================================
-// VALIDADORES
+// VALIDACIÓN (FluentValidation + Servicio propio)
 // =====================================
 builder.Services.AddValidatorsFromAssemblyContaining<RecetaValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
-builder.Services.AddValidatorsFromAssemblyContaining<CategoriaValidator>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
 
 // =====================================
@@ -80,7 +79,6 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 
-    // Incluir comentarios XML
     var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     if (File.Exists(xmlPath))
@@ -92,7 +90,7 @@ builder.Services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 // =====================================
-// CONFIGURAR MIDDLEWARE
+// PIPELINE DE MIDDLEWARE
 // =====================================
 if (app.Environment.IsDevelopment())
 {
@@ -100,12 +98,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Recetas v1");
-        options.RoutePrefix = string.Empty; // Swagger en la raíz
+        options.RoutePrefix = string.Empty;
     });
 }
 
 app.UseHttpsRedirection();
-app.UseAuthorization();
-app.MapControllers();
 
+// (Opcional para futuro)
+// app.UseAuthentication();
+
+app.UseAuthorization();
+
+app.MapControllers();
 app.Run();
