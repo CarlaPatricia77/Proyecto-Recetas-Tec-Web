@@ -44,7 +44,7 @@ namespace Recetas.Infrastructure.Repositories
         public async Task<Usuario?> GetByCorreoAsync(string correo) =>
             await _ctx.Usuarios
                 .Include(u => u.Recetas)
-                .FirstOrDefaultAsync(u => u.Correo == correo);
+                .FirstOrDefaultAsync(u => u.correo == correo);
 
         public async Task<IEnumerable<Usuario>> GetActiveUsersAsync() =>
             await _ctx.Usuarios

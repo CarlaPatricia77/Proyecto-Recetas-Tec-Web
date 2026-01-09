@@ -12,22 +12,22 @@ namespace Recetas.Infrastructure.Data.Configurations
 
             builder.ToTable("Usuarios");
 
-            builder.Property(u => u.Nombre)
+            builder.Property(u => u.nombre)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(u => u.Correo)
+            builder.Property(u => u.correo)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.HasIndex(u => u.Correo)
+            builder.HasIndex(u => u.correo)
                 .IsUnique();
 
-            builder.Property(u => u.Contrasena)
+            builder.Property(u => u.contrasena)
     .HasMaxLength(100)
     .IsRequired(false); // 👈 cambia a false
 
-            builder.Property(r => r.FechaCreacion)
+            builder.Property(r => r.fecha_creacion)
     .HasColumnType("datetime(6)")
     .IsRequired();
 

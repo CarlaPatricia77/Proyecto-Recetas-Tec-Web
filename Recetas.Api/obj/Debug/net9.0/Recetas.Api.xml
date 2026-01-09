@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Recetas.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Recetas.Api.Controllers.RecetaController">
+            <summary>
+            Controlador para la gestión de recetas, usuarios y categorías.
+            Proporciona endpoints para CRUD y consultas especializadas.
+            </summary>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.#ctor(Recetas.Core.Interfaces.IRecetaService,Recetas.Core.Interfaces.IUnitOfWork,AutoMapper.IMapper,Recetas.Infrastructure.Validators.IValidationService)">
+            <summary>
+            Constructor del controlador de recetas.
+            </summary>
+            <param name="recetaService">Servicio de lógica de negocio para recetas</param>
+            <param name="unitOfWork">Unit of Work para acceso a datos</param>
+            <param name="mapper">Automapper para conversión de entidades y DTOs</param>
+            <param name="validationService">Servicio de validación</param>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetas(Recetas.Core.QueryFilters.RecetaQueryFilter)">
+            <summary>
+            Obtiene todas las recetas con filtros opcionales y paginación.
+            </summary>
+            <param name="filters">Filtros de consulta para recetas</param>
+            <returns>Lista paginada de recetas</returns>
+            <response code="200">Retorna la lista de recetas</response>
+            <response code="400">Solicitud incorrecta</response>
+            <response code="500">Error interno del servidor</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetaById(System.Int32)">
+            <summary>
+            Obtiene una receta por su ID.
+            </summary>
+            <param name="id">ID de la receta</param>
+            <returns>Receta solicitada</returns>
+            <response code="200">Retorna la receta solicitada</response>
+            <response code="404">Receta no encontrada</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.CreateReceta(Recetas.Infrastructure.DTOs.RecetaDto)">
+            <summary>
+            Crea una nueva receta.
+            </summary>
+            <param name="dto">Datos de la receta</param>
+            <returns>Receta creada</returns>
+            <response code="201">Receta creada exitosamente</response>
+            <response code="400">Datos inválidos</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.UpdateReceta(System.Int32,Recetas.Infrastructure.DTOs.RecetaDto)">
+            <summary>
+            Actualiza una receta existente.
+            </summary>
+            <param name="id">ID de la receta</param>
+            <param name="dto">Datos actualizados</param>
+            <returns>Receta actualizada</returns>
+            <response code="200">Receta actualizada exitosamente</response>
+            <response code="400">Id no coincide</response>
+            <response code="404">Receta no encontrada</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.DeleteReceta(System.Int32)">
+            <summary>
+            Elimina una receta por su ID.
+            </summary>
+            <param name="id">ID de la receta</param>
+            <returns>Sin contenido</returns>
+            <response code="204">Receta eliminada exitosamente</response>
+            <response code="404">Receta no encontrada</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetasByCategoria(System.Int32)">
+            <summary>
+            Obtiene recetas por categoría.
+            </summary>
+            <param name="categoriaId">ID de la categoría</param>
+            <returns>Lista de recetas de la categoría</returns>
+            <response code="200">Retorna la lista de recetas</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetasByUsuario(System.Int32)">
+            <summary>
+            Obtiene recetas por usuario.
+            </summary>
+            <param name="usuarioId">ID del usuario</param>
+            <returns>Lista de recetas del usuario</returns>
+            <response code="200">Retorna la lista de recetas</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.BuscarPorIngrediente(System.String)">
+            <summary>
+            Busca recetas por ingrediente.
+            </summary>
+            <param name="ingrediente">Nombre del ingrediente</param>
+            <returns>Lista de recetas que contienen el ingrediente</returns>
+            <response code="200">Retorna la lista de recetas</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetUsuarios">
+            <summary>
+            Obtiene todos los usuarios.
+            </summary>
+            <returns>Lista de usuarios</returns>
+            <response code="200">Retorna la lista de usuarios</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetUsuarioById(System.Int32)">
+            <summary>
+            Obtiene un usuario por su ID.
+            </summary>
+            <param name="id">ID del usuario</param>
+            <returns>Usuario solicitado</returns>
+            <response code="200">Retorna el usuario solicitado</response>
+            <response code="404">Usuario no encontrado</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.CreateUsuario(Recetas.Infrastructure.DTOs.UsuarioDto)">
+            <summary>
+            Crea un nuevo usuario.
+            </summary>
+            <param name="dto">Datos del usuario</param>
+            <returns>Usuario creado</returns>
+            <response code="201">Usuario creado exitosamente</response>
+            <response code="400">Datos inválidos</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.UpdateUsuario(System.Int32,Recetas.Infrastructure.DTOs.UsuarioDto)">
+            <summary>
+            Actualiza un usuario existente.
+            </summary>
+            <param name="id">ID del usuario</param>
+            <param name="dto">Datos actualizados</param>
+            <returns>Usuario actualizado</returns>
+            <response code="200">Usuario actualizado exitosamente</response>
+            <response code="400">Id no coincide</response>
+            <response code="404">Usuario no encontrado</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.DeleteUsuario(System.Int32)">
+            <summary>
+            Elimina un usuario por su ID.
+            </summary>
+            <param name="id">ID del usuario</param>
+            <returns>Sin contenido</returns>
+            <response code="204">Usuario eliminado exitosamente</response>
+            <response code="404">Usuario no encontrado</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetCategorias">
+            <summary>
+            Obtiene todas las categorías.
+            </summary>
+            <returns>Lista de categorías</returns>
+            <response code="200">Retorna la lista de categorías</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetCategoriaById(System.Int32)">
+            <summary>
+            Obtiene una categoría por su ID.
+            </summary>
+            <param name="id">ID de la categoría</param>
+            <returns>Categoría solicitada</returns>
+            <response code="200">Retorna la categoría solicitada</response>
+            <response code="404">Categoría no encontrada</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.CreateCategoria(Recetas.Infrastructure.DTOs.CategoriaDto)">
+            <summary>
+            Crea una nueva categoría.
+            </summary>
+            <param name="dto">Datos de la categoría</param>
+            <returns>Categoría creada</returns>
+            <response code="201">Categoría creada exitosamente</response>
+            <response code="400">Datos inválidos</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.UpdateCategoria(System.Int32,Recetas.Infrastructure.DTOs.CategoriaDto)">
+            <summary>
+            Actualiza una categoría existente.
+            </summary>
+            <param name="id">ID de la categoría</param>
+            <param name="dto">Datos actualizados</param>
+            <returns>Categoría actualizada</returns>
+            <response code="200">Categoría actualizada exitosamente</response>
+            <response code="400">Id no coincide</response>
+            <response code="404">Categoría no encontrada</response>
+        </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.DeleteCategoria(System.Int32)">
+            <summary>
+            Elimina una categoría por su ID.
+            </summary>
+            <param name="id">ID de la categoría</param>
+            <returns>Sin contenido</returns>
+            <response code="204">Categoría eliminada exitosamente</response>
+            <response code="404">Categoría no encontrada</response>
+        </member>
+    </members>
+</doc>

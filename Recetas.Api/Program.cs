@@ -19,12 +19,10 @@ builder.Services.AddDbContext<RecetasContext>(options =>
 // =====================================
 // CONFIGURACIÓN DE SERVICIOS PRINCIPALES
 // =====================================
-
-// Controladores + JSON + desactivar filtro default + GlobalExceptionFilter
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ValidationFilter>();
-    options.Filters.Add<GlobalExceptionFilter>(); // ? Nuevo filtro global
+    options.Filters.Add<GlobalExceptionFilter>();
 })
 .AddNewtonsoftJson(options =>
 {
@@ -33,7 +31,6 @@ builder.Services.AddControllers(options =>
 })
 .ConfigureApiBehaviorOptions(options =>
 {
-    // Desactiva la validación automática de ModelState
     options.SuppressModelStateInvalidFilter = true;
 });
 
@@ -43,24 +40,21 @@ builder.Services.AddControllers(options =>
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // =====================================
-// REPOSITORIOS (Base Repository Genérico)
+// REPOSITORIOS
 // =====================================
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 // =====================================
-// SERVICES (Lógica de Negocio)
+// SERVICES
 // =====================================
 builder.Services.AddScoped<IRecetaService, RecetaService>();
 
 // =====================================
-// VALIDADORES (FluentValidation)
+// VALIDADORES
 // =====================================
-// Descomentar cuando crees los validadores:
-// builder.Services.AddValidatorsFromAssemblyContaining<RecetaValidator>();
-// builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
-// builder.Services.AddValidatorsFromAssemblyContaining<CategoriaValidator>();
-
-// Servicio de validación
+builder.Services.AddValidatorsFromAssemblyContaining<RecetaValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<UsuarioValidator>();
+builder.Services.AddValidatorsFromAssemblyContaining<CategoriaValidator>();
 builder.Services.AddScoped<IValidationService, ValidationService>();
 
 // =====================================
@@ -69,11 +63,49 @@ builder.Services.AddScoped<IValidationService, ValidationService>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 // =====================================
-// CONSTRUIR Y EJECUTAR LA APLICACIÓN
+// SWAGGER
 // =====================================
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "API de Recetas",
+        Version = "v1",
+        Description = "API para gestión de recetas, usuarios y categorías",
+        Contact = new Microsoft.OpenApi.Models.OpenApiContact
+        {
+            Name = "Equipo de Desarrollo",
+            Email = "desarrollo@recetas.com"
+        }
+    });
+
+    // Incluir comentarios XML
+    var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    if (File.Exists(xmlPath))
+    {
+        options.IncludeXmlComments(xmlPath);
+    }
+});
+
 var app = builder.Build();
+
+// =====================================
+// CONFIGURAR MIDDLEWARE
+// =====================================
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Recetas v1");
+        options.RoutePrefix = string.Empty; // Swagger en la raíz
+    });
+}
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
 app.Run();
