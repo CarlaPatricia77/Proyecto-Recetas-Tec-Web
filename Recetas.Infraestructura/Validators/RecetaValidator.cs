@@ -24,7 +24,7 @@ namespace Recetas.Infrastructure.Validators
                 .LessThanOrEqualTo(1440).WithMessage("El tiempo de preparación no puede exceder 24 horas (1440 minutos)");
 
             RuleFor(x => x.UsuarioId)
-                .GreaterThan(0).WithMessage("Debe especificar un usuario válido")
+                .GreaterThan(0).WithMessage("Dbe especficar un usuario válido")
                 .When(x => x.UsuarioId.HasValue);
 
             RuleFor(x => x.CategoriaId)

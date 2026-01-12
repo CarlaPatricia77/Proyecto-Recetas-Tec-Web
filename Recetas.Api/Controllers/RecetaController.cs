@@ -20,7 +20,7 @@ namespace Recetas.Api.Controllers
         private readonly IRecetaService _recetaService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
-        private readonly IValidationService _validationService;
+
 
         /// <summary>
         /// Constructor del controlador de recetas.
@@ -28,17 +28,14 @@ namespace Recetas.Api.Controllers
         /// <param name="recetaService">Servicio de lógica de negocio para recetas</param>
         /// <param name="unitOfWork">Unit of Work para acceso a datos</param>
         /// <param name="mapper">Automapper para conversión de entidades y DTOs</param>
-        /// <param name="validationService">Servicio de validación</param>
-        public RecetaController(
+          public RecetaController(
             IRecetaService recetaService,
             IUnitOfWork unitOfWork,
             IMapper mapper,
-            IValidationService validationService)
         {
             _recetaService = recetaService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
-            _validationService = validationService;
         }
 
         /// <summary>
