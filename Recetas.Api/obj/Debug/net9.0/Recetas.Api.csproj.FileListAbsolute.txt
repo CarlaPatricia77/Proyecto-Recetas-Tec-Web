@@ -561,3 +561,4 @@ C:\Users\LENOVO\Source\Repos\Proyecto-Recetas-Tec-Web\Recetas.Api\obj\Debug\net9
 C:\Users\LENOVO\Source\Repos\Proyecto-Recetas-Tec-Web\Recetas.Api\obj\Debug\net9.0\Recetas.Api.pdb
 C:\Users\LENOVO\Source\Repos\Proyecto-Recetas-Tec-Web\Recetas.Api\obj\Debug\net9.0\Recetas.Api.genruntimeconfig.cache
 C:\Users\LENOVO\Source\Repos\Proyecto-Recetas-Tec-Web\Recetas.Api\obj\Debug\net9.0\ref\Recetas.Api.dll
+C:\Users\LENOVO\Source\Repos\Proyecto-Recetas-Tec-Web\Recetas.Api\bin\Debug\net9.0\appsettings.Production.json

@@ -31,7 +31,7 @@ namespace Recetas.Api.Controllers
           public RecetaController(
             IRecetaService recetaService,
             IUnitOfWork unitOfWork,
-            IMapper mapper,
+            IMapper mapper)
         {
             _recetaService = recetaService;
             _unitOfWork = unitOfWork;

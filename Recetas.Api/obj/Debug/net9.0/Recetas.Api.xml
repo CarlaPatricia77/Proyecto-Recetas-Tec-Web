@@ -10,14 +10,13 @@
             Proporciona endpoints para CRUD y consultas especializadas.
             </summary>
         </member>
-        <member name="M:Recetas.Api.Controllers.RecetaController.#ctor(Recetas.Core.Interfaces.IRecetaService,Recetas.Core.Interfaces.IUnitOfWork,AutoMapper.IMapper,Recetas.Infrastructure.Validators.IValidationService)">
+        <member name="M:Recetas.Api.Controllers.RecetaController.#ctor(Recetas.Core.Interfaces.IRecetaService,Recetas.Core.Interfaces.IUnitOfWork,AutoMapper.IMapper)">
             <summary>
             Constructor del controlador de recetas.
             </summary>
             <param name="recetaService">Servicio de lógica de negocio para recetas</param>
             <param name="unitOfWork">Unit of Work para acceso a datos</param>
             <param name="mapper">Automapper para conversión de entidades y DTOs</param>
-            <param name="validationService">Servicio de validación</param>
         </member>
         <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetas(Recetas.Core.QueryFilters.RecetaQueryFilter)">
             <summary>

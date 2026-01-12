@@ -31,7 +31,6 @@ builder.Services.AddControllers(options =>
 })
 .ConfigureApiBehaviorOptions(options =>
 {
-    // Desactiva la validación automática de ModelState
     options.SuppressModelStateInvalidFilter = true;
 });
 
@@ -92,22 +91,19 @@ var app = builder.Build();
 // =====================================
 // PIPELINE DE MIDDLEWARE
 // =====================================
-if (app.Environment.IsDevelopment())
+
+// ?? SWAGGER HABILITADO EN TODOS LOS ENTORNOS
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Recetas v1");
-        options.RoutePrefix = string.Empty;
-    });
-}
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Recetas v1");
+    options.RoutePrefix = string.Empty; // Swagger en la raíz (https://socialmedia.azurewebsites.net)
+});
 
 app.UseHttpsRedirection();
-
-// (Opcional para futuro)
-// app.UseAuthentication();
 
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.Run();
