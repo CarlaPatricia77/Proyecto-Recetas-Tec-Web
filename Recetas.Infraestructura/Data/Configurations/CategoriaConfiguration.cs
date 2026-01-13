@@ -23,11 +23,22 @@ namespace Recetas.Infrastructure.Data.Configurations
                 .HasMaxLength(255);
 
             builder.Property(r => r.fecha_creacion)
-    .HasColumnType("datetime(6)")
-    .IsRequired();
+                .HasColumnType("datetime(6)")
+                .IsRequired();
 
             builder.Property(c => c.IsActive)
                 .IsRequired();
+
+            // Mapear explícitamente la columna FK (ahora opcional)
+            builder.Property(c => c.UsuarioId)
+                   .HasColumnName("UsuarioId")
+                   .IsRequired(false);
+
+            // relación con Usuario
+            builder.HasOne(c => c.Usuario)
+                   .WithMany()
+                   .HasForeignKey(c => c.UsuarioId)
+                   .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

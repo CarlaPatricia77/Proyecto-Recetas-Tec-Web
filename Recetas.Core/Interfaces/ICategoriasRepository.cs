@@ -13,8 +13,13 @@ namespace Recetas.Core.Interfaces
         Task DeleteAsync(Categoria categoria);
         Task<Categoria?> GetByNombreAsync(string nombre);
 
-        // 👇 Nuevos métodos específicos del negocio
+        // Nuevos métodos específicos del negocio
         Task<IEnumerable<Categoria>> GetCategoriasConMasDeNRecetasAsync(int cantidad);
         Task<IEnumerable<Categoria>> BuscarCategoriasPorDescripcionAsync(string texto);
+        //metodos agregadoos
+        Task<IEnumerable<Categoria>> GetCategoriasPorFecha(
+            DateTime fechaInicio,
+            DateTime fechaFin);
+
     }
 }

@@ -370,6 +370,47 @@ namespace Recetas.Api.Controllers
             await _unitOfWork.CategoriaRepository.Delete(id);
             await _unitOfWork.SaveChangesAsync();
             return NoContent();
+
+
         }
+        //ultimomes end point
+        [HttpGet("~/api/categoria/ultimo-mes")]
+        public async Task<IActionResult> GetCategoriasUltimoMes()
+        {
+            var fechaFin = DateTime.Now;
+            var fechaInicio = fechaFin.AddMonths(-1);
+
+            // Obtener todas las categorías y filtrar por fecha en memoria
+            var categorias = _unitOfWork.CategoriaRepository.GetAll()
+                .Where(c => c.fecha_creacion >= fechaInicio && c.fecha_creacion <= fechaFin);
+
+            var result = categorias.Select(c => new
+            {
+                Categoria = c.nombre,
+                Usuario = c.Usuario?.nombre,
+                FechaCreacion = c.fecha_creacion
+            });
+
+            return Ok(result);
+        }
+        [HttpGet("~/api/categoria/por-fechas")]
+        public async Task<IActionResult> GetCategoriasPorFechas(
+    [FromQuery] DateTime inicio,
+    [FromQuery] DateTime fin)
+        {
+            var categorias = _unitOfWork.CategoriaRepository.GetAll()
+                .Where(c => c.fecha_creacion >= inicio && c.fecha_creacion <= fin);
+
+            var result = categorias.Select(c => new
+            {
+                Categoria = c.nombre,
+                Usuario = c.Usuario?.nombre,
+                FechaCreacion = c.fecha_creacion
+            });
+
+            return Ok(result);
+        }
+
+
     }
 }

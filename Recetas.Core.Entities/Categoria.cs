@@ -1,8 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Recetas.Core.Entities
 {
@@ -13,7 +10,7 @@ namespace Recetas.Core.Entities
         public DateTime fecha_creacion { get; set; } = DateTime.Now;
         public bool IsActive { get; set; } = true;
 
-        // Usuario creador — ahora opcional
+        // Usuario creador � ahora opcional
         public int? UsuarioId { get; set; }
         public Usuario? Usuario { get; set; }
 

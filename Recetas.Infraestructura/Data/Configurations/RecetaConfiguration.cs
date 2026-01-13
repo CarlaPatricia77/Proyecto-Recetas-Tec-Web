@@ -9,8 +9,11 @@ namespace Recetas.Infrastructure.Data.Configurations
         public void Configure(EntityTypeBuilder<Receta> builder)
         {
             builder.HasKey(r => r.Id).HasName("PK_Receta");
-
             builder.ToTable("Recetas");
+
+            // Mapear Id a la columna de la BD
+            builder.Property(r => r.Id)
+                .HasColumnName("Id");
 
             builder.Property(r => r.Titulo)
                 .IsRequired()
@@ -23,14 +26,23 @@ namespace Recetas.Infrastructure.Data.Configurations
                 .IsRequired();
 
             builder.Property(r => r.TiempoPreparacion)
+                .HasColumnName("TiempoPreparacion")
                 .IsRequired();
 
             builder.Property(r => r.FechaCreacion)
-    .HasColumnType("datetime(6)")
-    .IsRequired();
+                .HasColumnName("FechaCreacion")
+                .HasColumnType("datetime(6)")
+                .IsRequired();
 
             builder.Property(r => r.IsActive)
                 .IsRequired();
+
+            // 👇 ESTO ES LO CRÍTICO - Mapear las foreign keys correctamente
+            builder.Property(r => r.UsuarioId)
+                .HasColumnName("UsuarioId");
+
+            builder.Property(r => r.CategoriaId)
+                .HasColumnName("CategoriaId");
 
             // Relaciones: Receta pertenece a un Usuario
             builder.HasOne(r => r.Usuario)

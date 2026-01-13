@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Recetas.Core.Entities;
 using Recetas.Core.Interfaces;
 using Recetas.Infrastructure.Data;
+using System;
+
 
 namespace Recetas.Infrastructure.Repositories
 {
@@ -56,6 +58,25 @@ namespace Recetas.Infrastructure.Repositories
          .Include(c => c.Recetas)
          .Where(c => c.descripcion != null && c.descripcion.Contains(texto))
          .ToListAsync();
+        //nuevo metodo
+        public async Task<IEnumerable<Categoria>> GetCategoriasPorRangoFechasAsync(
+    DateTime fechaInicio,
+    DateTime fechaFin)
+        {
+            return await _ctx.Categorias
+                .Include(c => c.Usuario)
+                .Where(c => c.fecha_creacion >= fechaInicio &&
+                            c.fecha_creacion <= fechaFin)
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<Categoria>> GetCategoriasPorFecha(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return await _ctx.Categorias
+                .Include(c => c.Usuario)
+                .Where(c => c.fecha_creacion >= fechaInicio && c.fecha_creacion <= fechaFin)
+                .ToListAsync();
+        }
+
 
     }
 }

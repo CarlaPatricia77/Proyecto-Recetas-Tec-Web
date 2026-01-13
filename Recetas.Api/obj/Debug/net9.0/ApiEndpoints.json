@@ -145,6 +145,37 @@
   },
   {
     "ContainingType": "Recetas.Api.Controllers.RecetaController",
+    "Method": "GetCategoriasPorFechas",
+    "RelativePath": "api/categoria/por-fechas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "inicio",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "fin",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Recetas.Api.Controllers.RecetaController",
+    "Method": "GetCategoriasUltimoMes",
+    "RelativePath": "api/categoria/ultimo-mes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Recetas.Api.Controllers.RecetaController",
     "Method": "GetRecetas",
     "RelativePath": "api/Receta",
     "HttpMethod": "GET",
