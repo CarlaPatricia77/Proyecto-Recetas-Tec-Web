@@ -13,5 +13,7 @@ namespace Recetas.Core.Interfaces
         Task InsertReceta(Receta receta);
         Task UpdateReceta(Receta receta);
         Task DeleteReceta(int id);
+        Task<IEnumerable<Receta>> GetRecetasUltimoMesAsync(); // Added method
     }
 }
+

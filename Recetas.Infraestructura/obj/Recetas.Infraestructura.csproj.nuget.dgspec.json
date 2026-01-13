@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj": {}
+    "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj": {}
   },
   "projects": {
-    "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj": {
+    "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj",
+        "projectUniqueName": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj",
         "projectName": "Recetas.Core",
-        "projectPath": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\obj\\",
+        "projectPath": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj",
+        "packagesPath": "C:\\Users\\usser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -65,24 +65,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj": {
+    "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj",
+        "projectUniqueName": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj",
         "projectName": "Recetas.Infraestructura",
-        "projectPath": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj",
-        "packagesPath": "C:\\Users\\LENOVO\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Infraestructura\\obj\\",
+        "projectPath": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Infraestructura\\Recetas.Infraestructura.csproj",
+        "packagesPath": "C:\\Users\\usser\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Infraestructura\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\LENOVO\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\usser\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -97,8 +97,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj": {
-                "projectPath": "C:\\Users\\LENOVO\\Source\\Repos\\Proyecto-Recetas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj"
+              "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj": {
+                "projectPath": "C:\\Users\\usser\\Source\\Repos\\Proyecto-Recetaaas-Tec-Web\\Recetas.Core\\Recetas.Core.csproj"
               }
             }
           }
@@ -113,7 +113,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -178,7 +178,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

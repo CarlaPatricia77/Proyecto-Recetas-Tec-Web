@@ -4,15 +4,16 @@ public class RecetaDto
 {
     public int Id { get; set; }
     public int? UsuarioId { get; set; }
-    public int? CategoriaId { get; set; }
+    public int? categoria_id { get; set; }
 
-    public string Titulo { get; set; } = null!;
-    public string? Descripcion { get; set; }
-    public string Ingredientes { get; set; } = null!;
-    public int TiempoPreparacion { get; set; }
-    public DateTime FechaCreacion { get; set; }
+    public string titulo { get; set; } = null!;
+    public string? descripcion { get; set; }
+    public string ingredientes { get; set; } = null!;
+    public int tiempo_preparacion { get; set; }
+    public DateTime fecha_creacion { get; set; }
 
     // Datos opcionales calculados o derivados
     public string? NombreUsuario { get; set; }
     public string? NombreCategoria { get; set; }
+
 }

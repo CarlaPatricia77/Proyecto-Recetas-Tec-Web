@@ -26,7 +26,7 @@
             }
           },
           {
-            "name": "CategoriaId",
+            "name": "categoria_id",
             "in": "query",
             "schema": {
               "type": "integer",
@@ -270,6 +270,49 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "/api/Receta/resumen-por-fechas": {
+      "get": {
+        "tags": [
+          "Receta"
+        ],
+        "parameters": [
+          {
+            "name": "desde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "hasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Receta/ultimo-mes": {
+      "get": {
+        "tags": [
+          "Receta"
+        ],
+        "summary": "Obtiene las recetas creadas en el último mes (nombre, categoría y usuario).",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
@@ -586,18 +629,14 @@
           }
         },
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "201": {
             "description": "Categoría creada exitosamente"
           },
           "400": {
-            "description": "Datos inválidos",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
+            "description": "Datos inválidos"
           }
         }
       }
@@ -889,7 +928,7 @@
             "format": "int32",
             "nullable": true
           },
-          "categoriaId": {
+          "categoria_id": {
             "type": "integer",
             "format": "int32",
             "nullable": true
@@ -906,11 +945,11 @@
             "type": "string",
             "nullable": true
           },
-          "tiempoPreparacion": {
+          "tiempo_preparacion": {
             "type": "integer",
             "format": "int32"
           },
-          "fechaCreacion": {
+          "fecha_creacion": {
             "type": "string",
             "format": "date-time"
           },
@@ -940,7 +979,7 @@
             "type": "string",
             "nullable": true
           },
-          "fechaCreacion": {
+          "fecha_creacion": {
             "type": "string",
             "format": "date-time"
           },

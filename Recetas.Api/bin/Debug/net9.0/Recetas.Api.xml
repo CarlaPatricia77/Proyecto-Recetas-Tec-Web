@@ -66,6 +66,12 @@
             <response code="204">Receta eliminada exitosamente</response>
             <response code="404">Receta no encontrada</response>
         </member>
+        <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetasUltimoMes">
+            <summary>
+            Obtiene las recetas creadas en el último mes (nombre, categoría y usuario).
+            </summary>
+            <returns>Lista de recetas del último mes</returns>
+        </member>
         <member name="M:Recetas.Api.Controllers.RecetaController.GetRecetasByCategoria(System.Int32)">
             <summary>
             Obtiene recetas por categoría.

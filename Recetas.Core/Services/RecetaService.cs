@@ -27,31 +27,31 @@ namespace Recetas.Core.Services
             // Aplicar filtros
             if (filters.UsuarioId.HasValue)
             {
-                recetas = recetas.Where(r => r.UsuarioId == filters.UsuarioId.Value);
+                recetas = recetas.Where(r => r.usuarioId == filters.UsuarioId.Value);
             }
 
-            if (filters.CategoriaId.HasValue)
+            if (filters.categoria_id.HasValue)
             {
-                recetas = recetas.Where(r => r.CategoriaId == filters.CategoriaId.Value);
+                recetas = recetas.Where(r => r.categoria_id == filters.categoria_id.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(filters.Busqueda))
             {
                 recetas = recetas.Where(r =>
-                    r.Titulo.Contains(filters.Busqueda, StringComparison.OrdinalIgnoreCase) ||
-                    (r.Descripcion != null && r.Descripcion.Contains(filters.Busqueda, StringComparison.OrdinalIgnoreCase))
+                    r.titulo.Contains(filters.Busqueda, StringComparison.OrdinalIgnoreCase) ||
+                    (r.descripcion != null && r.descripcion.Contains(filters.Busqueda, StringComparison.OrdinalIgnoreCase))
                 );
             }
 
             if (filters.TiempoMaximo.HasValue)
             {
-                recetas = recetas.Where(r => r.TiempoPreparacion <= filters.TiempoMaximo.Value);
+                recetas = recetas.Where(r => r.tiempo_preparacion <= filters.TiempoMaximo.Value);
             }
 
             if (!string.IsNullOrWhiteSpace(filters.Ingrediente))
             {
                 recetas = recetas.Where(r =>
-                    r.Ingredientes.Contains(filters.Ingrediente, StringComparison.OrdinalIgnoreCase)
+                    r.ingredientes.Contains(filters.Ingrediente, StringComparison.OrdinalIgnoreCase)
                 );
             }
 
@@ -66,9 +66,9 @@ namespace Recetas.Core.Services
         public async Task InsertReceta(Receta receta)
         {
             // REGLA DE NEGOCIO 1: Verificar que el usuario exista
-            if (receta.UsuarioId.HasValue)
+            if (receta.usuarioId.HasValue)
             {
-                var usuario = await _unitOfWork.UsuarioRepository.GetById(receta.UsuarioId.Value);
+                var usuario = await _unitOfWork.UsuarioRepository.GetById(receta.usuarioId.Value);
                 if (usuario == null)
                 {
                     throw new BusinessException("El usuario no existe", 400);
@@ -82,9 +82,9 @@ namespace Recetas.Core.Services
             }
 
             // REGLA DE NEGOCIO 2: Verificar que la categoría exista
-            if (receta.CategoriaId.HasValue)
+            if (receta.categoria_id.HasValue)
             {
-                var categoria = await _unitOfWork.CategoriaRepository.GetById(receta.CategoriaId.Value);
+                var categoria = await _unitOfWork.CategoriaRepository.GetById(receta.categoria_id.Value);
                 if (categoria == null)
                 {
                     throw new BusinessException("La categoría no existe", 400);
@@ -92,27 +92,32 @@ namespace Recetas.Core.Services
             }
 
             // REGLA DE NEGOCIO 3: No permitir contenido inapropiado
-            if (ContainsForbiddenContent(receta.Titulo) ||
-                (receta.Descripcion != null && ContainsForbiddenContent(receta.Descripcion)))
+            if (ContainsForbiddenContent(receta.titulo) ||
+                (receta.descripcion != null && ContainsForbiddenContent(receta.descripcion)))
             {
                 throw new BusinessException("El contenido contiene palabras no permitidas", 400);
             }
 
             // REGLA DE NEGOCIO 4: Tiempo de preparación debe ser positivo
-            if (receta.TiempoPreparacion <= 0)
+            if (receta.tiempo_preparacion <= 0)
             {
                 throw new BusinessException("El tiempo de preparación debe ser mayor a 0", 400);
             }
+
+            // Asignar la fecha de creación si no está seteada
+            if (receta.fecha_creacion == default)
+                receta.fecha_creacion = DateTime.UtcNow;
 
             await _unitOfWork.RecetaRepository.InsertAsync(receta);
             await _unitOfWork.SaveChangesAsync();
         }
 
+
         public async Task UpdateReceta(Receta receta)
         {
             // Validar contenido inapropiado
-            if (ContainsForbiddenContent(receta.Titulo) ||
-         (receta.Descripcion != null && ContainsForbiddenContent(receta.Descripcion)))
+            if (ContainsForbiddenContent(receta.titulo) ||
+         (receta.descripcion != null && ContainsForbiddenContent(receta.descripcion)))
             {
                 throw new BusinessException("El contenido contiene palabras no permitidas", 400);
             }
@@ -147,5 +152,21 @@ namespace Recetas.Core.Services
 
             return false;
         }
+
+        public async Task<IEnumerable<Receta>> GetRecetasUltimoMesAsync()
+        {
+            var desde = DateTime.UtcNow.AddMonths(-1);
+            var hasta = DateTime.UtcNow;
+
+            // Convert 'hasta' to the expected type 'System.Runtime.InteropServices.JavaScript.JSType.Date'
+            var hastaJsDate = (System.Runtime.InteropServices.JavaScript.JSType.Date)(object)hasta;
+
+            var recetas = await _unitOfWork.RecetaRepository.GetRecetasPorRangoFechasAsync(desde, hasta);
+
+            // Convert IEnumerable<object> to IEnumerable<Receta>
+            return recetas.Cast<Receta>();
+        }
+
+
     }
 }

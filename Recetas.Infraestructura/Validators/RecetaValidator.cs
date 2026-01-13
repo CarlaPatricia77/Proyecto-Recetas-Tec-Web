@@ -7,19 +7,19 @@ namespace Recetas.Infrastructure.Validators
     {
         public RecetaValidator()
         {
-            RuleFor(x => x.Titulo)
+            RuleFor(x => x.titulo)
                 .NotEmpty().WithMessage("El título es requerido")
                 .MaximumLength(100).WithMessage("El título no puede exceder 100 caracteres")
                 .MinimumLength(5).WithMessage("El título debe tener al menos 5 caracteres");
 
-            RuleFor(x => x.Descripcion)
+            RuleFor(x => x.descripcion)
                 .MaximumLength(500).WithMessage("La descripción no puede exceder 500 caracteres");
 
-            RuleFor(x => x.Ingredientes)
+            RuleFor(x => x.ingredientes)
                 .NotEmpty().WithMessage("Los ingredientes son requeridos")
                 .MinimumLength(10).WithMessage("Debe proporcionar más detalle en los ingredientes");
 
-            RuleFor(x => x.TiempoPreparacion)
+            RuleFor(x => x.tiempo_preparacion)
                 .GreaterThan(0).WithMessage("El tiempo de preparación debe ser mayor a 0")
                 .LessThanOrEqualTo(1440).WithMessage("El tiempo de preparación no puede exceder 24 horas (1440 minutos)");
 
@@ -27,9 +27,9 @@ namespace Recetas.Infrastructure.Validators
                 .GreaterThan(0).WithMessage("Dbe especficar un usuario válido")
                 .When(x => x.UsuarioId.HasValue);
 
-            RuleFor(x => x.CategoriaId)
+            RuleFor(x => x.categoria_id)
                 .GreaterThan(0).WithMessage("Debe especificar una categoría válida")
-                .When(x => x.CategoriaId.HasValue);
+                .When(x => x.categoria_id.HasValue);
         }
     }
 }

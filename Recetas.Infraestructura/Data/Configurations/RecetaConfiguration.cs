@@ -8,54 +8,51 @@ namespace Recetas.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Receta> builder)
         {
-            builder.HasKey(r => r.Id).HasName("PK_Receta");
-            builder.ToTable("Recetas");
+            builder.HasKey(r => r.Id).HasName("PK_recetas");
+            builder.ToTable("recetas"); // minúscula
 
-            // Mapear Id a la columna de la BD
             builder.Property(r => r.Id)
-                .HasColumnName("Id");
+                .HasColumnName("id"); // minúscula
 
-            builder.Property(r => r.Titulo)
+            builder.Property(r => r.titulo)
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.Property(r => r.Descripcion)
+            builder.Property(r => r.descripcion)
                 .HasMaxLength(500);
 
-            builder.Property(r => r.Ingredientes)
+            builder.Property(r => r.ingredientes)
                 .IsRequired();
 
-            builder.Property(r => r.TiempoPreparacion)
-                .HasColumnName("TiempoPreparacion")
+            builder.Property(r => r.tiempo_preparacion)
+                .HasColumnName("tiempo_preparacion") // minúscula y guion bajo
                 .IsRequired();
 
-            builder.Property(r => r.FechaCreacion)
-                .HasColumnName("FechaCreacion")
-                .HasColumnType("datetime(6)")
+            builder.Property(r => r.fecha_creacion)
+                .HasColumnName("fecha_creacion") // minúscula y guion bajo
+                .HasColumnType("datetime")
                 .IsRequired();
 
             builder.Property(r => r.IsActive)
+                .HasColumnName("IsActive")
                 .IsRequired();
 
-            // 👇 ESTO ES LO CRÍTICO - Mapear las foreign keys correctamente
-            builder.Property(r => r.UsuarioId)
-                .HasColumnName("UsuarioId");
+            builder.Property(r => r.usuarioId)
+                .HasColumnName("usuario_id"); // minúscula y guion bajo
 
-            builder.Property(r => r.CategoriaId)
-                .HasColumnName("CategoriaId");
+            builder.Property(r => r.categoria_id)
+                .HasColumnName("categoria_id"); // minúscula y guion bajo
 
-            // Relaciones: Receta pertenece a un Usuario
             builder.HasOne(r => r.Usuario)
                 .WithMany(u => u.Recetas)
-                .HasForeignKey(r => r.UsuarioId)
-                .HasConstraintName("FK_Receta_Usuario")
+                .HasForeignKey(r => r.usuarioId)
+                .HasConstraintName("fk_usuario_receta")
                 .OnDelete(DeleteBehavior.SetNull);
 
-            // Relaciones: Receta pertenece a una Categoria
             builder.HasOne(r => r.Categoria)
                 .WithMany(c => c.Recetas)
-                .HasForeignKey(r => r.CategoriaId)
-                .HasConstraintName("FK_Receta_Categoria")
+                .HasForeignKey(r => r.categoria_id)
+                .HasConstraintName("fk_categoria_receta")
                 .OnDelete(DeleteBehavior.SetNull);
         }
     }

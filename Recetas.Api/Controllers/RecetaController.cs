@@ -84,7 +84,12 @@ namespace Recetas.Api.Controllers
                 return NotFound($"No se encontró la receta con id {id}.");
             return Ok(_mapper.Map<RecetaDto>(receta));
         }
-
+        [HttpGet("resumen-por-fechas")]
+        public async Task<IActionResult> GetRecetasResumenPorFechas([FromQuery] DateTime desde, [FromQuery] DateTime hasta)
+        {
+            var resumen = await _unitOfWork.RecetaRepository.GetRecetasPorRangoFechasAsync(desde, hasta);
+            return Ok(resumen);
+        }
         /// <summary>
         /// Crea una nueva receta.
         /// </summary>
@@ -146,6 +151,17 @@ namespace Recetas.Api.Controllers
                 return NotFound($"No se encontró la receta con id {id}.");
             await _recetaService.DeleteReceta(id);
             return NoContent();
+        }
+        /// <summary>
+        /// Obtiene las recetas creadas en el último mes (nombre, categoría y usuario).
+        /// </summary>
+        /// <returns>Lista de recetas del último mes</returns>
+        [HttpGet("ultimo-mes")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetRecetasUltimoMes()
+        {
+            var recetas = await _recetaService.GetRecetasUltimoMesAsync();
+            return Ok(recetas);
         }
 
         /// <summary>
@@ -317,17 +333,27 @@ namespace Recetas.Api.Controllers
         /// <returns>Categoría creada</returns>
         /// <response code="201">Categoría creada exitosamente</response>
         /// <response code="400">Datos inválidos</response>
+
         [HttpPost("~/api/categoria")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> CreateCategoria([FromBody] CategoriaDto dto)
         {
+            if (dto == null)
+            {
+                return BadRequest("The provided data is invalid.");
+            }
+
             var entity = _mapper.Map<Categoria>(dto);
+            if (entity == null)
+            {
+                return BadRequest("Mapping failed.");
+            }
+
             await _unitOfWork.CategoriaRepository.Add(entity);
             await _unitOfWork.SaveChangesAsync();
             var result = _mapper.Map<CategoriaDto>(entity);
             return CreatedAtAction(nameof(GetCategoriaById), new { id = result.id }, result);
         }
+
 
         /// <summary>
         /// Actualiza una categoría existente.

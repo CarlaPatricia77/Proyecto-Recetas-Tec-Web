@@ -19,7 +19,7 @@ namespace Recetas.Core.QueryFilters
         /// <summary>
         /// Filtrar por ID de categoría
         /// </summary>
-        public int? CategoriaId { get; set; }
+        public int? categoria_id { get; set; }
 
         /// <summary>
         /// Buscar por título o descripción

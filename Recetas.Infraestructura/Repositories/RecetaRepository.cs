@@ -2,6 +2,7 @@
 using Recetas.Core.Entities;
 using Recetas.Core.Interfaces;
 using Recetas.Infrastructure.Data;
+using Recetas.Core.DTOs;
 
 namespace Recetas.Infrastructure.Repositories
 {
@@ -50,19 +51,36 @@ namespace Recetas.Infrastructure.Repositories
             await _entities
                 .Include(r => r.Categoria)
                 .Include(r => r.Usuario)
-                .Where(r => r.CategoriaId == categoriaId)
+                .Where(r => r.categoria_id == categoriaId)
                 .ToListAsync();
 
         public async Task<IEnumerable<Receta>> GetByUsuarioAsync(int usuarioId) =>
             await _entities
                 .Include(r => r.Categoria)
                 .Include(r => r.Usuario)
-                .Where(r => r.UsuarioId == usuarioId)
+                .Where(r => r.usuarioId == usuarioId)
                 .ToListAsync();
 
         public async Task<IEnumerable<Receta>> BuscarPorIngredienteAsync(string ingrediente) =>
             await _entities
-                .Where(r => r.Ingredientes.Contains(ingrediente))
+                .Where(r => r.ingredientes.Contains(ingrediente))
                 .ToListAsync();
+        public async Task<IEnumerable<RecetaResumenDto>> GetRecetasPorRangoFechasAsync(DateTime desde, DateTime hasta)
+        {
+            return await _entities
+                .Include(r => r.Categoria)
+                .Include(r => r.Usuario)
+                .Where(r => r.fecha_creacion >= desde && r.fecha_creacion <= hasta)
+                .Select(r => new RecetaResumenDto
+                {
+                    NombreReceta = r.titulo,
+                    Categoria = r.Categoria != null ? r.Categoria.nombre : null,
+                    Usuario = r.Usuario != null ? r.Usuario.nombre : null
+                })
+                .ToListAsync();
+        }
+
+
+
     }
 }
